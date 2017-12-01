@@ -16,6 +16,12 @@
 		*	@var array
 		*/
 		protected $routes = [];
+        
+        /*
+		*	Parameters from the matched route
+		*	@var array
+		*/
+		protected $params = [];
 		
 		/*
 		*	Adds a route to the routing table
@@ -38,6 +44,28 @@
 		public function getRoutes()
 		{
 			return $this->routes;
+		}
+        
+        /*
+		*	Match the route to the routes already defined in the routing table,
+        *   if route foun dthen set the $params
+		*
+		*	@param string $url the route URL
+		*
+		*	@return bool true if a match was found, false otherwise
+		*/
+		public function Match($url)
+		{
+			foreach($this->routes as $route => $params)
+            {
+                if ($url == $route)
+                {
+                    $this->params = $params;
+                    return true;
+                }
+            }
+            
+            return false;
 		}
 	
 	}
